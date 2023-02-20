@@ -13,6 +13,10 @@ import {
     CourseFormComponent
 } from "./components";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { EmailValidatorDirective } from './directives/email.directive';
+import { DurationPipe } from './pipes/duration.pipe';
+import { DatePipe } from './pipes/date.pipe';
+import { ToggleDirective } from './pipes/toggle.pipe';
 
 const components = [
     HeaderComponent,
@@ -27,14 +31,14 @@ const components = [
 ];
 
 @NgModule({
-    declarations: [components],
+    declarations: [components, EmailValidatorDirective, DurationPipe, DatePipe, ToggleDirective],
     imports: [
         CommonModule,
         FontAwesomeModule,
         FormsModule,
         ReactiveFormsModule,
     ],
-    exports: [components],
+    exports: [components, EmailValidatorDirective, DurationPipe, DatePipe, ToggleDirective],
 })
 export class SharedModule {
 }

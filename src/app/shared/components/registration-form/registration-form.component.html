@@ -1,34 +1,40 @@
 <h2 class="text-align-center">Registration</h2>
 <div class="app-plate">
-  <div class="registration-form">
-    <div>
-      <div class="form__control">
-        <label for="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          placeholder="Input text"
-        />
+  <form [formGroup]="registrationForm">
+    <div class="registration-form">
+      <div>
+        <div class="form__control">
+          <label for="name">Name</label>
+          <input type="text" id="name" formControlName="name" placeholder="Input text" />
+          <span *ngIf="registrationForm.controls['name'].invalid && registrationForm.controls['name'].touched"
+            class="text-danger">
+            Name is required.
+          </span>
+        </div>
+        <div class="form__control">
+          <label for="email">Email</label>
+          <input type="text" id="email" formControlName="email" placeholder="Input text" emailValidator />
+          <span
+            *ngIf="registrationForm.controls['email'].invalid && registrationForm.controls['email'].touched && registrationForm.controls['email'].errors?.['emailValidator']"
+            class="text-danger">
+            Email is required.
+          </span>
+        </div>
+        <div class="form__control">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" toggle placeholder="Input text" />
+          <span *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched"
+            class="text-danger">
+            Password is required.
+          </span>
+        </div>
       </div>
-      <div class="form__control">
-        <label for="email">Email</label>
-        <input
-          type="text"
-          id="email"
-          placeholder="Input text"
-        />
+      <div class="form__action">
+        <app-button text="login" (click)="registrate()"></app-button>
       </div>
-      <div class="form__control">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          placeholder="Input text"
-        />
+      <div class="form__text">
+        If you have an account you may <strong>Login</strong>
       </div>
     </div>
-    <div class="form__action">
-      <app-button></app-button>
-    </div>
-  </div>
+  </form>
 </div>

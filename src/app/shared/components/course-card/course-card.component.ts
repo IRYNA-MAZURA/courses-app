@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Card } from 'src/app/features/models/card.model';
 
 @Component({
@@ -6,17 +6,11 @@ import { Card } from 'src/app/features/models/card.model';
   templateUrl: './course-card.component.html',
   styleUrls: ['./course-card.component.scss']
 })
-export class CourseCardComponent implements OnInit{
+export class CourseCardComponent {
   @Input()
   cardData!: Card;
 
-  durationDate!: Date;
-
   isShowModal!: boolean;
-
-  ngOnInit(): void {
-    this.durationDate = new Date(1970, 1, 1, 0, this.cardData.duration);
-  }
 
   clickOnShowHandler(): void {
     this.isShowModal = !this.isShowModal;

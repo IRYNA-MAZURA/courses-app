@@ -22,8 +22,14 @@ export class ButtonComponent {
   @Input()
   iconName!: IconName;
 
+  @Input()
+  typeName!: string;
+
+  @Input()
+  isButton!: boolean;
+
   @Output()
-  click: EventEmitter<void> = new EventEmitter(); 
+  click: EventEmitter<void> = new EventEmitter();
 
   iconEnum: typeof IconName = IconName;
 

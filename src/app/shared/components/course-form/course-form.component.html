@@ -1,58 +1,62 @@
-<!-- Replace ::text:: with your code -->
 <h2>Create / Edit Course</h2>
-<form>
+<form [formGroup]="courseForm">
   <div class="app-plate">
     <div class="course">
       <h3>Main Info</h3>
       <div class="form__control">
         <label for="title">Title</label>
-        <input
-          type="text"
-          id="title"
-          placeholder="Input text"
-        />
+        <input type="text" id="title" placeholder="Input text" formControlName="title" />
+        <span *ngIf="courseForm.controls['title'].invalid && courseForm.controls['title'].touched" class="text-danger">
+          Title is required.
+        </span>
       </div>
       <div class="form__control">
         <label for="description">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          placeholder="Input text"
-          rows="4"
-          cols="5"
-        ></textarea>
+        <textarea id="description" name="description" placeholder="Input text" rows="4" cols="5"
+          formControlName="description"></textarea>
+        <span *ngIf="courseForm.controls['description'].invalid && courseForm.controls['description'].touched"
+          class="text-danger">
+          Description is required.
+        </span>
       </div>
       <div class="separator"></div>
       <h3>Authors</h3>
       <div class="form__control">
+        <span>Author Name</span>
         <div class="course__flex">
-          <input
-            type="text"
-            id="author"
-            placeholder="Input Author Name"
-          />
-          <app-button></app-button>
+          <input type="text" id="author" #authorData placeholder="Input Author Name" formControlName="author" />
+          <app-button text="create author" (click)="addAuthor(authorData.value)"></app-button>
         </div>
         <div class="course__authors">
-          ::Authors::
+          <span>Authors List</span>
+          <ng-container formArrayName="authors">
+            <div *ngFor="let item of authorsFormArray.controls; let i = index">
+              <div class="course__author">
+                <span>{{ item.value }}</span>
+                <button (click)="removeAuthor(i)">X</button>
+              </div>
+            </div>
+          </ng-container>
         </div>
       </div>
       <div class="separator"></div>
       <h3>Duration</h3>
       <div class="form__control">
         <div class="course__flex">
-          <input
-            type="number"
-            id="duration"
-            placeholder="Input duration"
-          />
+          <input type="number" id="duration" placeholder="Input duration" formControlName="duration" />
+          <span
+            *ngIf="courseForm.controls['duration'].invalid && courseForm.controls['duration'].touched"
+            class="text-danger">
+            Duration is required.
+          </span>
           <div class="course__duration">
-            ::Duration::
+            <span>{{ courseForm.controls['duration'].value | duration }}</span>
           </div>
         </div>
       </div>
-      <div class="form__action">
-        <app-button></app-button>
+      <div class="form__action form-action-course-button">
+        <app-button text="cancel"></app-button>
+        <app-button text="create course"></app-button>
       </div>
     </div>
   </div>

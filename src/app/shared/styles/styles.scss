@@ -3,14 +3,12 @@ $color-gray: #CFCFCF;
 $color-red: #FF0000;
 
 .app-plate {
-    width: 100%;
-    min-height: 477px;
+    width: max-content;
     background-color: $color-white;
     border: 1px solid $color-gray;
     border-radius: 4px;
     padding: 32px;
-    display: flex;
-    justify-content: center;
+    margin: auto;
 }
 
 .text-align-center {
@@ -26,6 +24,9 @@ $color-red: #FF0000;
 .form {
     &__control {
         margin-bottom: 24px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
     }
 
     &__action {
@@ -35,11 +36,15 @@ $color-red: #FF0000;
     &__text {
         text-align: center;
         margin-top: 38px;
-      flex-wrap: wrap;
+        flex-wrap: wrap;
     }
 }
 
 .separator {
     width: 100%;
     border-bottom: 1px solid $color-gray;
+}
+
+.text-danger {
+    color: red;
 }
