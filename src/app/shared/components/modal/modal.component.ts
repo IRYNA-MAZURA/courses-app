@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { Card } from 'src/app/features/models/card.model';
 
 @Component({
   selector: 'app-modal',
@@ -19,6 +20,9 @@ export class ModalComponent {
 
   @Input()
   cancelButtonText!: string;
+
+  @Input()
+  data!: Card;
 
   @Output()
   confirm: EventEmitter<boolean> = new EventEmitter();

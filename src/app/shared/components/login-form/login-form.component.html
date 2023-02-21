@@ -4,17 +4,21 @@
     <div class="login-form">
       <div>
         <div class="form__control">
-          <label for="email">Email</label>
+          <label for="email" class="text-field__label">Email</label>
           <input type="text" #email="ngModel" [(ngModel)]="loginFormData.email" id="email" name="email"
-            placeholder="Input text" emailValidator required />
+            placeholder="Input text" class="text-field__input"
+            [class.text-field__input__error]="(email.touched || loginForm.submitted) && email.errors?.['emailValidator']"
+            emailValidator required />
           <span class="text-danger" *ngIf="(email.touched || loginForm.submitted) && email.errors?.['emailValidator']">
             Email is required.
           </span>
         </div>
         <div class="form__control">
-          <label for="password">Password</label>
+          <label for="password" class="text-field__label">Password</label>
           <input type="password" #password="ngModel" [(ngModel)]="loginFormData.password" id="password" name="password"
-            placeholder="Input text" required />
+            placeholder="Input text" class="text-field__input"
+            [class.text-field__input__error]="(password.touched || loginForm.submitted) && password.errors?.['required']"
+            required />
           <span class="text-danger" *ngIf="(password.touched || loginForm.submitted) && password.errors?.['required']">
             Password is required.
           </span>
@@ -22,7 +26,7 @@
       </div>
       <div>
         <div class="form__action">
-          <app-button text="login" typeName="submit" [isButton]="true"></app-button>
+          <app-button text="login" typeName="submit"></app-button>
         </div>
         <div class="form__text">
           If you don't have an account you may <strong>Registration</strong>

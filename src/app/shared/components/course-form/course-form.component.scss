@@ -1,7 +1,7 @@
 @import 'src/app/shared/styles/styles';
 
 .course {
- min-width: 60vw;
+  min-width: 60vw;
 
   &__flex {
     display: flex;
@@ -26,18 +26,26 @@
     display: flex;
     flex-direction: column;
 
+    &-list {
+      display: flex;
+      margin-top: 10px;
+    }
+
     &-item {
       margin-right: 10px;
+    }
+  }
+
+  &__author {
+    &-cross {
+      border: none;
+      background: none;
+      cursor: pointer;
     }
   }
 
   &__icon {
     margin-left: 4px;
     cursor: pointer;
-  }
-
-  .form-action-course-button {
-    display: flex;
-    justify-content: flex-end;
   }
 }

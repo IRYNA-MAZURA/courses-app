@@ -1,5 +1,12 @@
-<app-search placeholder="Input text" (onSearch)="search()"></app-search>
-<app-course-list [listData]="mockedCourseList"></app-course-list>
-<app-login-form></app-login-form>
-<app-registration-form></app-registration-form>
-<app-course-form></app-course-form>
+<app-header name="Harry Potter">
+    <app-button text="logout"></app-button>
+</app-header>
+<div class="courses-wrapper">
+    <app-search placeholder="Input text" (onSearch)="search()"></app-search>
+    <app-course-list [listData]="mockedCourseList" (cardInfo)="getCardData($event)"></app-course-list>
+    <app-login-form></app-login-form>
+    <app-registration-form></app-registration-form>
+    <app-course-form></app-course-form>
+</div>
+<app-modal *ngIf="isShowModal" title="Message" message="Message Text" okButtonText="ok" cancelButtonText="cancel"
+    (confirm)="getResult($event)" [data]="cardInfo"></app-modal>

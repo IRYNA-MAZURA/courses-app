@@ -1,22 +1,17 @@
-<button *ngIf="isButton; else notButton" class="app-button app-button-type" (click)="onClick($event)" [attr.type]="typeName">
+<button *ngIf="!isIcon; else icon" class="app-button  app-button-type" (click)="onClick($event)" [attr.type]="typeName">
   {{text}}
 </button>
-<ng-template #notButton>
-  <div *ngIf="!isIcon; else icon" class="app-button" (click)="onClick($event)">
-    {{text}}
-  </div>
-  <ng-template #icon>
-    <div class="app-button" (click)="onClick($event)">
-      <ng-container [ngSwitch]="iconName">
-        <ng-container *ngSwitchCase="iconEnum.pencilAlt">
-          <fa-icon class="icon" icon="pencil-alt">
-          </fa-icon>
-        </ng-container>
-        <ng-container *ngSwitchCase="iconEnum.delete">
-          <fa-icon class="icon" icon="trash">
-          </fa-icon>
-        </ng-container>
+<ng-template #icon>
+  <button class="app-button" (click)="onClick($event)">
+    <ng-container [ngSwitch]="iconName">
+      <ng-container *ngSwitchCase="iconEnum.pencilAlt">
+        <fa-icon class="icon" icon="pencil-alt">
+        </fa-icon>
       </ng-container>
-    </div>
-  </ng-template>
+      <ng-container *ngSwitchCase="iconEnum.delete">
+        <fa-icon class="icon" icon="trash">
+        </fa-icon>
+      </ng-container>
+    </ng-container>
+  </button>
 </ng-template>

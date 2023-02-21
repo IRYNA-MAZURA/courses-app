@@ -1,1 +1,10 @@
-<app-card *ngFor="let cardData of listData" [cardData]="cardData" [isEditable]="isEditable"></app-card>
+<app-course-card *ngFor="let cardData of listData" [cardData]="cardData" (clickOnShow)="clickOnShow($event)">
+    <div *ngIf="isEditable" class="buttons" ngProjectAs="edit-buttons">
+        <div class="edit">
+            <app-button [iconName]="iconEnum.pencilAlt" [isIcon]="true" (click)="edit()"></app-button>
+        </div>
+        <div>
+            <app-button [iconName]="iconEnum.delete" [isIcon]="true" (click)="remove()"></app-button>
+        </div>
+    </div>
+</app-course-card>

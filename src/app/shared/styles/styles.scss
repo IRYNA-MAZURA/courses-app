@@ -3,12 +3,21 @@ $color-gray: #CFCFCF;
 $color-red: #FF0000;
 
 .app-plate {
-    width: max-content;
+    max-width: 400px;
     background-color: $color-white;
     border: 1px solid $color-gray;
     border-radius: 4px;
     padding: 32px;
     margin: auto;
+
+    & form {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__course {
+        max-width: none;
+    }
 }
 
 .text-align-center {
@@ -31,6 +40,15 @@ $color-red: #FF0000;
 
     &__action {
         margin-top: 54px;
+
+        &__course-buttons {
+            display: flex;
+            justify-content: flex-end;
+
+            &__cancel {
+                margin-right: 15px;
+            }
+        }
     }
 
     &__text {

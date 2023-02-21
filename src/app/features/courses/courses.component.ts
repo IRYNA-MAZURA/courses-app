@@ -35,4 +35,18 @@ export class CoursesComponent {
   search(): void {
     console.log('Search');
   }
+
+  isShowModal!: boolean;
+
+  getResult(result: boolean): void {
+    this.isShowModal = !this.isShowModal;
+    console.log(result);
+  }
+
+  cardInfo!: Card;
+
+  getCardData(card: Card): void {
+    this.cardInfo = card;
+    this.isShowModal = !this.isShowModal;
+  }
 }
