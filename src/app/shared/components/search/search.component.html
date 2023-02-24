@@ -1,6 +1,7 @@
 <div class="app-search">
   <form #searchForm="ngForm" class="app-search-form">
-    <input type="text" #search="ngModel" [(ngModel)]="searchText" id="search" name="search" [placeholder]="placeholder">
+    <input type="text" #search="ngModel" [(ngModel)]="searchText" id="search" name="search" [placeholder]="placeholder"
+      class="text-field__input">
     <app-button text="search" (click)="clickSearch()"></app-button>
   </form>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Card } from 'src/app/features/models/card.model';
 
 @Component({
@@ -10,14 +10,10 @@ export class CourseCardComponent {
   @Input()
   cardData!: Card;
 
-  isShowModal!: boolean;
+  @Output()
+  clickOnShow: EventEmitter<Card> = new EventEmitter<Card>();
 
   clickOnShowHandler(): void {
-    this.isShowModal = !this.isShowModal;
-  }
-
-  getResult(result: boolean): void {
-    this.clickOnShowHandler();
-    console.log(result);
+    this.clickOnShow.emit(this.cardData);
   }
 }

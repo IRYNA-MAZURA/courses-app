@@ -7,18 +7,16 @@
     <div class="course-card__info-text">
       <div>
         <b>Authors: </b>
-        <p *ngFor="let author of cardData.authors">
+        <span *ngFor="let author of cardData.authors">
           {{author}}
-        </p>
+        </span>
       </div>
       <div><b>Duration: </b>{{cardData.duration | duration }}</div>
       <div><b>Created: </b>{{cardData.creationDate | customDate}}</div>
     </div>
     <div class="course-card__info-actions">
       <app-button (click)="clickOnShowHandler()"></app-button>
-      <ng-content></ng-content>
+      <ng-content select="edit-buttons"></ng-content>
     </div>
   </div>
 </div>
-<app-modal *ngIf="isShowModal" title="Message" message="Message Text" okButtonText="ok" cancelButtonText="cancel"
-  (confirm)="getResult($event)"></app-modal>

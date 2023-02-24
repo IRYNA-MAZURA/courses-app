@@ -2,6 +2,7 @@
     &__backdrop {
         position: fixed;
         display: flex;
+        z-index: 1;
         left: 0;
         top: 0;
         justify-content: center;
@@ -31,9 +32,7 @@
         font-size: 24px;
     }
 
-    &__message {
-
-    }
+    &__message {}
 
     &__icon {
         cursor: pointer;
