@@ -17,6 +17,10 @@
         background: #016486;
     }
 
+    &:disabled {
+        background: #808080;
+    }
+
     &__single-icon {
         padding: 13px;
     }

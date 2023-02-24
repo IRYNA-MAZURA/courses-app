@@ -25,6 +25,9 @@ export class ButtonComponent {
   @Input()
   typeName!: string;
 
+  @Input()
+  disabled?: boolean;
+
   @Output()
   click: EventEmitter<void> = new EventEmitter();
 
