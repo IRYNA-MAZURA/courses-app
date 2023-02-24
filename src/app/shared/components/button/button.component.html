@@ -1,4 +1,5 @@
-<button *ngIf="!isIcon; else icon" class="app-button  app-button-type" (click)="onClick($event)" [attr.type]="typeName">
+<button *ngIf="!isIcon; else icon" class="app-button  app-button-type" (click)="onClick($event)" [attr.type]="typeName"
+  [disabled]="disabled">
   {{text}}
 </button>
 <ng-template #icon>

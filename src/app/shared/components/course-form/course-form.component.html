@@ -27,9 +27,13 @@
         <label for="author" class="text-field__label">Author Name</label>
         <div class="course__flex">
           <input type="text" id="author" #authorData placeholder="Input Author Name" formControlName="author"
-            class="text-field__input" />
-          <app-button text="create author" (click)="addAuthor(authorData.value)"></app-button>
+            class="text-field__input" [class.text-field__input__error]="courseForm.controls['author'].invalid" />
+          <app-button text="create author" (click)="addAuthor(authorData.value)"
+            [disabled]="courseForm.controls['author'].invalid || courseForm.controls['author'].value===''"></app-button>
         </div>
+        <span *ngIf="courseForm.controls['author'].invalid" class="text-danger">
+          New author should contain only latin letters and numbers.
+        </span>
         <div class="course__authors">
           <span class="text-field__label">Authors List</span>
           <div class="course__authors-list">
@@ -47,7 +51,7 @@
       <div class="separator"></div>
       <h3>Duration</h3>
       <div class="form__control">
-        <label for="author" class="text-field__label">Duration</label>
+        <label for="duration" class="text-field__label">Duration</label>
         <div class="course__flex">
           <input type="number" id="duration" placeholder="Input duration" formControlName="duration"
             class="text-field__input"
