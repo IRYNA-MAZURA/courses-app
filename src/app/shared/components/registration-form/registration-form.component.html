@@ -1,6 +1,6 @@
 <h2 class="text-align-center">Registration</h2>
 <div class="app-plate">
-  <form [formGroup]="registrationForm">
+  <form [formGroup]="registrationForm" #registrationF="ngForm" validate (ngSubmit)="registrationF.form.valid && registrate(registrationF)">
     <div class="registration-form">
       <div>
         <div class="form__control">
@@ -35,10 +35,10 @@
         </div>
       </div>
       <div class="form__action">
-        <app-button text="login" (click)="registrate()"></app-button>
+        <app-button text="registrate" typeName="submit"></app-button>
       </div>
       <div class="form__text">
-        If you have an account you may <strong>Login</strong>
+        If you have an account you may <strong class="log_reg" (click)="goToLogin()">Login</strong>
       </div>
     </div>
   </form>

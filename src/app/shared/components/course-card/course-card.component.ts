@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Card } from 'src/app/features/models/card.model';
+import { Router } from '@angular/router';
+import { Course } from 'src/app/models/courses-api-results';
 
 @Component({
   selector: 'app-course-card',
@@ -8,12 +9,15 @@ import { Card } from 'src/app/features/models/card.model';
 })
 export class CourseCardComponent {
   @Input()
-  cardData!: Card;
+  cardData!: Course;
 
   @Output()
-  clickOnShow: EventEmitter<Card> = new EventEmitter<Card>();
+  clickOnShow: EventEmitter<Course> = new EventEmitter<Course>();
+
+  constructor(private router: Router) {
+  }
 
   clickOnShowHandler(): void {
-    this.clickOnShow.emit(this.cardData);
+    this.router.navigate([`/courses/${this.cardData.id}`])
   }
 }

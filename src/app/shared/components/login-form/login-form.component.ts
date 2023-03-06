@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -11,7 +14,20 @@ export class LoginFormComponent {
     password: ''
   }
 
-  login(): void {
-    console.log("login");
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) {
+  }
+
+  login(form: NgForm): void {
+    this.auth.login(form.value).subscribe(() => {
+      console.log('User is logged in')
+      this.router.navigate([this.auth.getRedirectUrl()]);
+    });
+  }
+
+  goToRegistartion(): void {
+    this.router.navigate(['/registration']);
   }
 }

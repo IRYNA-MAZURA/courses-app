@@ -1,12 +1,12 @@
-<app-header name="Harry Potter">
-    <app-button text="logout"></app-button>
-</app-header>
-<div class="courses-wrapper">
-    <app-search placeholder="Input text" (onSearch)="search()"></app-search>
-    <app-course-list [listData]="mockedCourseList" (cardInfo)="getCardData($event)"></app-course-list>
-    <app-login-form></app-login-form>
-    <app-registration-form></app-registration-form>
-    <app-course-form></app-course-form>
+<div class="search_container">
+  <app-search placeholder="Input text" (onSearch)="search($event)"></app-search>
+<ng-container *ngIf="isAdmin">
+    <app-button text="add course" (click)="addCourse()"></app-button>
+</ng-container>  
 </div>
-<app-modal *ngIf="isShowModal" title="Message" message="Message Text" okButtonText="ok" cancelButtonText="cancel"
-    (confirm)="getResult($event)" [data]="cardInfo"></app-modal>
+
+<app-course-list [courses]="courses | async" [isEditable]="isAdmin"
+    (deleteCourse)="deleteItem($event)"></app-course-list>
+
+<app-modal [(isVisible)]="isShowConfirmModal" (confirm)="confirmedDelete()" cancelButtonText="Cancel"
+    message="Are you sure?" okButtonText="Ok" [title]="'Delete course: ' + deletedId"></app-modal>

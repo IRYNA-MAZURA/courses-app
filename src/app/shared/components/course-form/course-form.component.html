@@ -1,4 +1,4 @@
-<h2>Create / Edit Course</h2>
+<h2>{{calledPlace == 'add' ? 'Create' : 'Edit'}} Course</h2>
 <form [formGroup]="courseForm">
   <div class="app-plate app-plate__course">
     <div class="course">
@@ -67,9 +67,9 @@
       </div>
       <div class="form__action form__action__course-buttons">
         <div class="form__action__course-buttons__cancel">
-          <app-button text="cancel"></app-button>
+          <app-button text="cancel" (click)="goToCourses()"></app-button>
         </div>
-        <app-button text="create course"></app-button>
+        <app-button [text]="calledPlace == 'add' ? 'create corse' : 'edit course'" (click)="createCourse()"></app-button>
       </div>
     </div>
   </div>

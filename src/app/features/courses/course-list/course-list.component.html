@@ -1,10 +1,15 @@
-<app-course-card *ngFor="let cardData of listData" [cardData]="cardData" (clickOnShow)="clickOnShow($event)">
-    <div *ngIf="isEditable" class="buttons" ngProjectAs="edit-buttons">
-        <div class="edit">
-            <app-button [iconName]="iconEnum.pencilAlt" [isIcon]="true" (click)="edit()"></app-button>
+<ng-container *ngIf="courses?.length">
+    <app-course-card *ngFor="let cardData of courses" [cardData]="cardData" (clickOnShow)="clickOnShow($event)">
+        <div *ngIf="isEditable" class="buttons" ngProjectAs="edit-buttons">
+            <div class="edit">
+                <app-button [iconName]="iconEnum.pencilAlt" [isIcon]="true" (click)="edit(cardData.id)"></app-button>
+            </div>
+            <div>
+                <app-button [iconName]="iconEnum.delete" [isIcon]="true" (click)="remove(cardData.id)"></app-button>
+            </div>
         </div>
-        <div>
-            <app-button [iconName]="iconEnum.delete" [isIcon]="true" (click)="remove()"></app-button>
-        </div>
-    </div>
-</app-course-card>
+    </app-course-card>
+</ng-container>
+<ng-container *ngIf="!courses?.length">
+    <app-info title="Your List Is Empty"></app-info>
+</ng-container>
