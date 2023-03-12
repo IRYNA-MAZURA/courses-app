@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { Course } from 'src/app/models/courses-api-results';
 import { IconName } from '../../enums/iconName.enum';
 import { Card } from '../../models/card.model';
 
@@ -9,25 +11,34 @@ import { Card } from '../../models/card.model';
 })
 export class CourseListComponent {
   @Input()
-  listData!: Card[];
+  courses: Course[] | null = null;
 
   @Input()
   isEditable: boolean = true;
 
   @Output()
-  cardInfo: EventEmitter<Card> = new EventEmitter<Card>();
+  cardInfo: EventEmitter<Course> = new EventEmitter<Course>();
+
+  @Output() 
+  deleteCourse = new EventEmitter<string>()
+
+  constructor(
+    private router: Router
+  ) { }
 
   iconEnum: typeof IconName = IconName;
 
-  edit(): void {
+  edit(id: string): void {
     console.log('edit');
+    this.router.navigate([`/courses/edit/${id}`]);
   }
 
-  remove(): void {
+  remove(id: string): void {
     console.log('remove');
+    this.deleteCourse.emit(id);
   }
 
-  clickOnShow(data: Card): void {
+  clickOnShow(data: Course): void {
     this.cardInfo.emit(data);
   }
 }

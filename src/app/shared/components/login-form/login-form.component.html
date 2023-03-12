@@ -1,6 +1,6 @@
 <h2 class="text-align-center">Login</h2>
 <div class="app-plate">
-  <form #loginForm="ngForm" validate (ngSubmit)="loginForm.form.valid && login()">
+  <form #loginForm="ngForm" validate (ngSubmit)="loginForm.form.valid && login(loginForm)">
     <div class="login-form">
       <div>
         <div class="form__control">
@@ -29,7 +29,7 @@
           <app-button text="login" typeName="submit"></app-button>
         </div>
         <div class="form__text">
-          If you don't have an account you may <strong>Registration</strong>
+          If you don't have an account you may <strong class="log_reg" (click)="goToRegistartion()">Registration</strong>
         </div>
       </div>
     </div>

@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { Card } from 'src/app/features/models/card.model';
 
 @Component({
   selector: 'app-modal',
@@ -9,29 +8,43 @@ import { Card } from 'src/app/features/models/card.model';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
-  @Input()
+  @Input() 
+  isVisible: boolean = false;
+
+  @Input() 
   title!: string;
 
-  @Input()
+  @Input() 
   message!: string;
 
-  @Input()
+  @Input() 
   okButtonText!: string;
 
-  @Input()
+  @Input() 
   cancelButtonText!: string;
+  
+  @Output() 
+  isVisibleChange: EventEmitter<boolean> = new EventEmitter();
 
-  @Input()
-  data!: Card;
-
-  @Output()
-  confirm: EventEmitter<boolean> = new EventEmitter();
+  @Output() 
+  outputResult: EventEmitter<boolean> = new EventEmitter();
 
   constructor(library: FaIconLibrary) {
     library.addIconPacks(fas);
   }
 
-  onClick(isConfirm: boolean): void {
-    this.confirm.emit(isConfirm);
+  private hideModal() {
+    this.isVisible = false;
+    this.isVisibleChange.emit(false);
+  }
+
+  onConfirm() {
+    this.outputResult.emit(true);
+    this.hideModal();
+  }
+
+  onCancel() {
+    this.outputResult.emit(false);
+    this.hideModal();
   }
 }

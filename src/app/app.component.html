@@ -1,1 +1,7 @@
-<app-courses></app-courses>
+<app-header [name]="userName">
+    <app-button text="Sing up" (click)="singUp()" *ngIf="!isAuthorized"></app-button>
+    <app-button text="Logout" (click)="logout()" *ngIf="isAuthorized"></app-button>
+</app-header>
+<div class="wrapper">
+    <router-outlet></router-outlet>
+</div>
