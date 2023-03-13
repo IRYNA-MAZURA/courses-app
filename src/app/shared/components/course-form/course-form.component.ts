@@ -49,6 +49,7 @@ export class CourseFormComponent implements OnInit {
     this.courseForm.controls['duration'].setValue(course.duration);
 
     course.authors.forEach(author => {
+      this.newAuthors.push(author);
       this.coursesStoreService.getAuthorById(author).subscribe(value => {
         (this.courseForm.controls['authors'] as FormArray).push(new FormControl(value.result.name));
       })
@@ -56,14 +57,16 @@ export class CourseFormComponent implements OnInit {
   }
 
   authorsFormArray: FormArray = this.courseForm.get('authors') as FormArray;
+  newAuthors: string[] = [];
 
   addAuthor(value: string): void {
     this.authorsFormArray.push(new FormControl(value, [Validators.required]));
-    this.coursesStoreService.createAuthor(value).subscribe();
+    this.coursesStoreService.createAuthor(value).subscribe((value) => this.newAuthors.push(value.result.id));
   }
 
   removeAuthor(index: number): void {
     this.authorsFormArray.removeAt(index);
+    this.newAuthors.splice(index, 1);
   }
 
   createCourse(): void {
@@ -71,7 +74,7 @@ export class CourseFormComponent implements OnInit {
       title: this.courseForm.get('title')?.value as string,
       description: this.courseForm.get('description')?.value as string,
       duration: this.courseForm.get('duration')?.value as number,
-      authors: this.courseForm.get('authors')?.value as string[],
+      authors: this.newAuthors,
       creationDate: new Date().toLocaleString()
     };
 

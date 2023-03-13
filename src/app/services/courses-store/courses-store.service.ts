@@ -82,7 +82,7 @@ export class CoursesStoreService {
 
     createAuthor(name: string) {
         this.isLoading$$.next(true);
-        return this.coursesService.getAuthorById(name).pipe(tap(() => { this.isLoading$$.next(false) }));
+        return this.coursesService.createAuthor(name).pipe(tap(() => { this.isLoading$$.next(false) }));
     }
 
     filterCourses(value: string) {
