@@ -2,7 +2,7 @@
     <app-course-card *ngFor="let cardData of courses" [cardData]="cardData" (clickOnShow)="clickOnShow($event)">
         <div *ngIf="isEditable" class="buttons" ngProjectAs="edit-buttons">
             <div class="edit">
-                <app-button [iconName]="iconEnum.pencilAlt" [isIcon]="true" (click)="edit(cardData.id)"></app-button>
+                <app-button [iconName]="iconEnum.pencilAlt" [isIcon]="true" (click)="edit(cardData)"></app-button>
             </div>
             <div>
                 <app-button [iconName]="iconEnum.delete" [isIcon]="true" (click)="remove(cardData.id)"></app-button>

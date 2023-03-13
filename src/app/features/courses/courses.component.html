@@ -1,11 +1,14 @@
+<div class="errorMessage" *ngIf="errorMessage$ | async">
+    {{errorMessage$ | async}}
+</div>
 <div class="search_container">
-  <app-search placeholder="Input text" (onSearch)="search($event)"></app-search>
-<ng-container *ngIf="isAdmin">
-    <app-button text="add course" (click)="addCourse()"></app-button>
-</ng-container>  
+    <app-search placeholder="Input text" (onSearch)="search($event)"></app-search>
+    <ng-container *ngIf="isAdmin">
+        <app-button text="add course" (click)="addCourse()"></app-button>
+    </ng-container>
 </div>
 
-<app-course-list [courses]="courses | async" [isEditable]="isAdmin"
+<app-course-list [courses]="courses$ | async" [isEditable]="isAdmin"
     (deleteCourse)="deleteItem($event)"></app-course-list>
 
 <app-modal [(isVisible)]="isShowConfirmModal" (confirm)="confirmedDelete()" cancelButtonText="Cancel"

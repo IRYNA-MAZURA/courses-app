@@ -12,8 +12,12 @@ import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { TokenInterceptor } from "./auth/interceptors/token.interceptor";
 import { CoursesService } from "./services/courses/courses.service";
-import { CoursesStoreService } from "./services/courses-store/courses-store.service";
 import { UserModule } from "./user/user.module";
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { effects, reducers } from './store';
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,13 @@ import { UserModule } from "./user/user.module";
     AppRoutingModule,
     SharedModule,
     AuthModule,
-    UserModule
+    UserModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot(effects),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [
     AuthorizedGuard,
@@ -38,9 +48,8 @@ import { UserModule } from "./user/user.module";
       multi: true
     },
     CoursesService,
-    CoursesStoreService
   ],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -12,7 +12,7 @@
         </span>
       </div>
       <div><b>Duration: </b>{{cardData.duration | duration }}</div>
-      <div><b>Created: </b>{{cardData.creationDate | date}}</div>
+      <div><b>Created: </b>{{cardData.creationDate | customDate}}</div>
     </div>
     <div class="course-card__info-actions">
       <app-button (click)="clickOnShowHandler()"></app-button>
