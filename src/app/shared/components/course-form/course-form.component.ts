@@ -8,6 +8,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { Course } from 'src/app/models/courses-api-results';
 import { CoursesStoreService } from 'src/app/services/courses-store/courses-store.service';
+import { CoursesStateFacade } from 'src/app/store/courses/courses.facade';
 
 @Component({
   selector: 'app-course-form',
@@ -15,20 +16,19 @@ import { CoursesStoreService } from 'src/app/services/courses-store/courses-stor
   styleUrls: ['./course-form.component.scss'],
 })
 export class CourseFormComponent implements OnInit {
-  course!: Course;
   place: string[] = this.router.url.split('/');
   cardId: string | null = this.route.snapshot.paramMap.get('id');
 
   ngOnInit() {
     if (this.cardId) {
-      this.coursesStoreService.getCourse(this.cardId).subscribe(data => {
-        this.course = data.result;
-        this.setCourseForm(this.course);
+      this.route.queryParams.subscribe((params) => {
+        const {id, title, description, creationDate, duration, authors} = params;
+        this.setCourseForm({id, title, description, creationDate, duration, authors: authors.split(',')});
       });
     }
   }
 
-  constructor(public fb: FormBuilder, public library: FaIconLibrary, private coursesStoreService: CoursesStoreService, private router: Router, private route: ActivatedRoute) {
+  constructor(public fb: FormBuilder, public library: FaIconLibrary, private courseStateService: CoursesStateFacade, private coursesStoreService: CoursesStoreService, private router: Router, private route: ActivatedRoute) {
     library.addIconPacks(fas);
   }
 
@@ -73,7 +73,7 @@ export class CourseFormComponent implements OnInit {
     const course = {
       title: this.courseForm.get('title')?.value as string,
       description: this.courseForm.get('description')?.value as string,
-      duration: this.courseForm.get('duration')?.value as number,
+      duration: +this.courseForm.get('duration')?.value,
       authors: this.newAuthors,
       creationDate: new Date().toLocaleString()
     };
@@ -84,9 +84,9 @@ export class CourseFormComponent implements OnInit {
         ...course
       };
 
-      this.coursesStoreService.editCourse(this.cardId, courseData).subscribe();
+      this.courseStateService.editCourse(this.cardId, courseData);
     } else {
-      this.coursesStoreService.createCourse(course).subscribe();
+      this.courseStateService.createCourse(course);
     }
   }
 

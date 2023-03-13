@@ -2,3 +2,10 @@
     display: flex;
     justify-content: space-between;
 }
+
+.errorMessage {
+    background-color: red;
+    color: #F7F7F7;
+    padding: 24px;
+    margin-bottom: 12px;
+}

@@ -19,7 +19,7 @@ export class CourseListComponent {
   @Output()
   cardInfo: EventEmitter<Course> = new EventEmitter<Course>();
 
-  @Output() 
+  @Output()
   deleteCourse = new EventEmitter<string>()
 
   constructor(
@@ -28,9 +28,10 @@ export class CourseListComponent {
 
   iconEnum: typeof IconName = IconName;
 
-  edit(id: string): void {
+  edit(course: Course): void {
+    const {id, title, description, creationDate, duration, authors} = course;
     console.log('edit');
-    this.router.navigate([`/courses/edit/${id}`]);
+    this.router.navigate([`/courses/edit/${course.id}`], { queryParams: { id, title, description, creationDate, duration, authors: authors.join(',')} });
   }
 
   remove(id: string): void {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CoursesStoreService } from "../../services/courses-store/courses-store.service";
+import { CoursesStateFacade } from 'src/app/store/courses/courses.facade';
 import { UserStoreService } from "../../user/services/user-store/user-store.service";
 
 @Component({
@@ -9,13 +9,14 @@ import { UserStoreService } from "../../user/services/user-store/user-store.serv
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
-  courses = this.coursesStoreService.courses$;
+  courses$ = this.courseStateService.allCourses$;
+  errorMessage$ = this.courseStateService.errorMessage$;
   isAdmin: boolean = false;
   isShowConfirmModal = false;
   deletedId: string | null = null;
 
   constructor(
-    private coursesStoreService: CoursesStoreService,
+    private courseStateService: CoursesStateFacade,
     private userStoreService: UserStoreService,
     private router: Router
   ) { }
@@ -24,7 +25,7 @@ export class CoursesComponent implements OnInit {
     this.userStoreService.isAdmin$.subscribe((res) => {
     this.isAdmin = res;
     })
-    this.coursesStoreService.getAll().subscribe();
+    this.courseStateService.getAllCourses();
   }
 
   deleteItem(id: string) {
@@ -35,7 +36,7 @@ export class CoursesComponent implements OnInit {
 
   confirmedDelete() {
     if (this.deletedId) {
-      this.coursesStoreService.deleteCourse(this.deletedId).subscribe();
+      this.courseStateService.deleteCourse(this.deletedId);
     }
 
     this.deletedId = null;
@@ -43,10 +44,10 @@ export class CoursesComponent implements OnInit {
 
   search(text: string) {
     if (text) {
-      this.coursesStoreService.getFilterCourses(text).subscribe();
+      this.courseStateService.filteredCourses(text?.trim());
       console.log('search');
     } else {
-      this.coursesStoreService.getAll().subscribe();
+      this.courseStateService.getAllCourses();
     }
   }
 
